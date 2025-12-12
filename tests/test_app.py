@@ -42,6 +42,13 @@ def test_divide_incorrect():
     assert divide(6, 2) != 4
     assert divide(9, 3) != 4
 
+def test_divide_by_zero():
+    try:
+        divide(5, 0)
+        assert False, "Expected ValueError for division by zero"
+    except ValueError as e:
+        assert str(e) == "Cannot divide by zero."
+
 def test_square():
     assert square(4) == 16
     assert square(-3) == 9
@@ -56,7 +63,14 @@ def test_square_root():
 
 def test_square_root_incorrect():
     assert square_root(25) != 6
-    assert square_root(4) != -3
+    assert square_root(4) != 3
+
+def test_square_root_negative():
+    try:
+        square_root(-9)
+        assert False, "Expected ValueError for square root of negative number"
+    except ValueError as e:
+        assert str(e) == "Cannot take the square root of a negative number."
 
 def test_percent():
     assert percent(50, 200) == 25
@@ -73,6 +87,19 @@ def test_log():
 def test_log_incorrect():
     assert log(100, 10) != 3
     assert log(16, 2) != 5
+
+def test_log_invalid():
+    try:
+        log(-10, 10)
+        assert False, "Expected ValueError for logarithm of negative number"
+    except ValueError as e:
+        assert str(e) == "Logarithm is undefined"
+    
+    try:
+        log(10, 1)
+        assert False, "Expected ValueError for logarithm base less than or equal to one"
+    except ValueError as e:
+        assert str(e) == "Logarithm base must be greater than one."
 
 def test_sin():
     assert sin(math.pi / 2) == 1
